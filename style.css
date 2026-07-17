@@ -57,8 +57,16 @@ h1 {
     cursor: grab;
 
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
 
-    cursor: grab;
+.number.dragging {
+    opacity: .5;
+}
+
+body {
+    overflow-x: hidden;
 }
 
 .number.dragging,

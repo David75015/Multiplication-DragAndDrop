@@ -10,6 +10,8 @@ const message = document.getElementById("message");
 
 
 let draggedNumber = null;
+let mobileNumber = null;
+let ghost = null;
 
 
 /* =========================
@@ -180,13 +182,80 @@ dropzones.forEach(dropzone => {
 });
 
 numbers.forEach(number => {
+
+    /* ---------- PC ---------- */
+
     number.addEventListener("dragstart", () => {
+
         draggedNumber = number.textContent;
-        number.classList.add("dragging"); // Ajoute la classe pour le style grabbing
+        number.classList.add("dragging");
+
     });
 
-    // Ajoute un écouteur pour dragend
     number.addEventListener("dragend", () => {
-        number.classList.remove("dragging"); // Retire la classe à la fin du drag
+
+        number.classList.remove("dragging");
+
     });
+
+
+    /* ---------- MOBILE ---------- */
+
+    number.addEventListener("touchstart", () => {
+
+        mobileNumber = number.textContent;
+
+        ghost = number.cloneNode(true);
+
+        ghost.style.position = "fixed";
+        ghost.style.pointerEvents = "none";
+        ghost.style.opacity = "0.8";
+        ghost.style.zIndex = "9999";
+
+        document.body.appendChild(ghost);
+
+    });
+
+
+    number.addEventListener("touchmove", (e) => {
+
+        if (!ghost) return;
+
+        const touch = e.touches[0];
+
+        ghost.style.left = `${touch.clientX - ghost.offsetWidth / 2}px`;
+        ghost.style.top = `${touch.clientY - ghost.offsetHeight / 2}px`;
+
+        e.preventDefault();
+
+    }, { passive: false });
+
+
+    number.addEventListener("touchend", (e) => {
+
+        if (!ghost) return;
+
+        const touch = e.changedTouches[0];
+
+        const target = document.elementFromPoint(
+            touch.clientX,
+            touch.clientY
+        );
+
+        if (target && target.classList.contains("dropzone")) {
+
+            target.textContent = mobileNumber;
+
+            message.textContent = "";
+            message.className = "";
+
+        }
+
+        ghost.remove();
+
+        ghost = null;
+        mobileNumber = null;
+
+    });
+
 });

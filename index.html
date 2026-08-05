@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Addition Drag & Drop</title>
+    <title>Soustraction Drag & Drop</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Complète l'addition</h1>
+    <h1>Complète la soustraction</h1>
 
     <!-- CHIFFRES -->
     <div class="numbers">
 
+        <div class="number" draggable="true">-</div>
         <div class="number" draggable="true">0</div>
         <div class="number" draggable="true">1</div>
         <div class="number" draggable="true">2</div>
@@ -31,7 +32,7 @@
     </div>
 
 
-    <!-- ADDITION -->
+    <!-- SOUSTRACTION -->
     <div class="operation">
 
         <!-- RETENUES -->
@@ -61,16 +62,27 @@
         <!-- DEUXIEME NOMBRE -->
         <div class="line number-line" id="secondNumber">
 
-            <span class="plus">+</span>
+            <span class="plus">-</span>
 
             <div class="box dropzone"></div>
             <div class="box dropzone"></div>
             <div class="box dropzone"></div>
             <div class="box dropzone"></div>
             <div class="box dropzone"></div>
+
 
         </div>
 
+        <!-- RETENUES -->
+        <div class="line carry-line">
+
+            <div class="box carry dropzone"></div>
+            <div class="box carry dropzone"></div>
+            <div class="box carry dropzone"></div>
+            <div class="box carry dropzone"></div>
+            <div class="box carry dropzone"></div>
+
+        </div>
 
         <div class="separator"></div>
 

@@ -90,18 +90,30 @@ function getNumber(lineId) {
     const line = document.getElementById(lineId);
     const boxes = line.querySelectorAll(".box");
 
-    let number = "";
+    let isNegative = false;
+    let digits = "";
 
     boxes.forEach(box => {
-        number += box.textContent || "0";
+        const value = box.textContent.trim();
+
+        if (value === "-") {
+            isNegative = true;
+        } else if (value) {
+            digits += value;
+        }
     });
 
-    return Number(number);
+    if (digits === "") {
+        digits = "0";
+    }
+
+    const number = Number(digits);
+    return isNegative ? -number : number;
 }
 
 
 /* =========================
-   VERIFIER L'ADDITION
+   VERIFIER LA SOUSTRACTION
 ========================= */
 
 checkButton.addEventListener("click", () => {
@@ -121,7 +133,7 @@ checkButton.addEventListener("click", () => {
         result === null
     ) {
 
-        message.textContent = "Incorrect ❌";
+        message.textContent = "Incorrect";
 
         message.className = "incorrect";
 
@@ -132,7 +144,7 @@ checkButton.addEventListener("click", () => {
 
     /* VERIFICATION */
 
-    if (firstNumber + secondNumber === result) {
+    if (firstNumber - secondNumber === result) {
 
         message.textContent = "Bravo";
 

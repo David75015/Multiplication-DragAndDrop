@@ -113,7 +113,7 @@ function getNumber(lineId) {
 
 
 /* =========================
-   VERIFIER LA SOUSTRACTION
+   VERIFIER LA MULTIPLICATION
 ========================= */
 
 checkButton.addEventListener("click", () => {
@@ -144,7 +144,7 @@ checkButton.addEventListener("click", () => {
 
     /* VERIFICATION */
 
-    if (firstNumber - secondNumber === result) {
+    if (firstNumber * secondNumber === result) {
 
         message.textContent = "Bravo";
 
